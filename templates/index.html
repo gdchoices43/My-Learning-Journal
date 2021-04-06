@@ -1,12 +1,14 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div class="entry-list">
-        {% for entry in entries %}
-            <article>
-                <h2><a href="{{ url_for('detail', id=entry.id) }}"></a>{{ entry.title }}</h2>
-                <time datetime="{{ entry.date }}">{{ entry.date.strftime("%m-%d-%Y") }}</time>
-            </article>
-        {% endfor %}
-    </div>
+{% for entry in stream %}
+<div class="entry-list">
+    <article>
+        <h2><a href="{{ url_for('get_entry', entry_id=entry.id) }}">{{ entry.title }}</a></h2>
+        <div>
+            <h3>{{ entry.date }}</h3>
+        </div>
+    </article>
+</div>
+{% endfor %}
 {% endblock %}

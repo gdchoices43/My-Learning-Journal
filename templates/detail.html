@@ -1,23 +1,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
-{% for entry in entries %}
+{% for entry in stream %}
 <div class="entry-list">
     <article>
         <h2>{{ entry.title }}</h2>
         <div class="entry">
-            <h3>Date:</h3>
-            <p>{{ entry.date }}</p>
-            <h3>Time Spent:</h3>
-            <p>{{ entry.time }}</p><br><br>
-            <h3>What I Learned:</h3>
+            <h3>Date</h3>
+            <p>{{ entry.date }}</p><br><br>
+            <h3>Time Spent</h3>
+            <p>{{ entry.time }} hours</p><br><br>
+            <h3>What I Learned</h3>
             <p>{{ entry.i_learned }}</p><br><br>
-            <h3>Resources to Remember:</h3>
+            <h3>Resources to Remember</h3>
             <p>{{ entry.resources }}</p><br><br>
         </div>
-        <div class="edit">
-            <p><a href="{{ url_for('delete_entry', id=entry.id) }}">Delete Entry</a></p>
-            <p><a href="{{ url_for('edit_entry', id=entry.id) }}">Edit Entry</a></p>
+        <div>
+            <p><a href="{{ url_for('delete_entry', entry_id=entry.id) }}">Delete Entry</a></p>
+            <p><a href="{{ url_for('edit_entry', entry_id=entry.id) }}">Edit Entry</a></p>
         </div>
    </article>
 </div>

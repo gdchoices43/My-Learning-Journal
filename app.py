@@ -23,8 +23,8 @@ def after_request(response):
 @app.route("/")
 @app.route("/entries", methods=("GET", "POST"))
 def index():
-    entries = models.Entry.select().order_by(models.Entry.date.desc())
-    return render_template("layout.html", entries=entries)
+    stream = models.Entry.select().order_by(models.Entry.date.desc())
+    return render_template("index.html", stream=stream)
 
 
 @app.route("/entries/new", methods=("GET", "POST"))
@@ -45,8 +45,8 @@ def new_entry():
 
 @app.route("/entries/<int:entry_id>")
 def get_entry(entry_id):
-    entry = models.Entry.select().where(models.Entry.id == entry_id)
-    return render_template("detail.html", entry=entry)
+    entries = models.Entry.select().where(models.Entry.id == entry_id)
+    return render_template("detail.html", stream=entries)
 
 
 @app.route("/entries/<int:entry_id>/edit", methods=("GET", "POST"))
