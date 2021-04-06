@@ -65,6 +65,7 @@ def edit_entry(entry_id):
         entry.time = form.time.data
         entry.i_learned = form.i_learned.data
         entry.resources = form.resources.data
+        entry.save()
         flash("Saved Entry", "success")
         return redirect(url_for("index"))
     return render_template("edit.html", form=form, entry=entry)
@@ -73,7 +74,7 @@ def edit_entry(entry_id):
 @app.route("/entries/<int:entry_id>/delete", methods=("GET", "POST"))
 def delete_entry(entry_id):
     try:
-        entry = models.Entry.get(models.Entry.get_id == entry_id)
+        entry = models.Entry.get(models.Entry.id == entry_id)
         entry.delete_instance()
         flash("Deleted Entry", "success")
     except models.DoesNotExist:

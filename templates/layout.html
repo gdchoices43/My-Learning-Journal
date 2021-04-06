@@ -7,18 +7,18 @@
         <link href="https://fonts.googleapis.com/css?family=Cousine:400" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Work+Sans:600" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="css/static/normalize.css">
-        <link rel="stylesheet" href="css/static/site.css">
+        <link rel="stylesheet" href="/static/css/normalize.css">
+        <link rel="stylesheet" href="/static/css/site.css">
     </head>
     <body>
         <header>
-            <h1>My Learning Journal</h1>
             <div class="container">
                 <div class="site-header">
-                    <h2>Welcome! What have you learned today?</h2>
+                    <h1></h1>
+                    <h2>Welcome to My Learning Journal</h2>
                     <div class="container">
-                            <a href="{{ url_for('new_entry') }}" class="button icon-right">New Entry</a><br><br>
-                            <a href="{{ url_for('index') }}" class="button icon-right" title="Home">Home Page</a><br><br>
+                        <a class="logo" href="{{ url_for('index') }}"><i class="material-icons">library_books</i></a>
+                        <a class="button icon-right" href="{{ url_for('new_entry')}}"><span>New Entry</span></a>
                     </div>
                 </div>
             </div>

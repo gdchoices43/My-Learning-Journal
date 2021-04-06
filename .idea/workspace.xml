@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7f94b231-4f40-4607-81bb-e95a1d35c6f3" name="Default Changelist" comment="Still trying to figure out how to get my entries to show on the homepage">
-      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
+    <list default="true" id="7f94b231-4f40-4607-81bb-e95a1d35c6f3" name="Default Changelist" comment="can't get the edit to work properly">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617736764524</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="can't get the edit to work properly">
+      <created>1617741448030</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1617741448030</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -111,6 +114,7 @@
     <MESSAGE value="Got most of forms.py and models.py done.&#10;They may be changed due to the project requirements later on." />
     <MESSAGE value="Worked on the HTML files, not done with them but wanted to commit what I had" />
     <MESSAGE value="Still trying to figure out how to get my entries to show on the homepage" />
-    <option name="LAST_COMMIT_MESSAGE" value="Still trying to figure out how to get my entries to show on the homepage" />
+    <MESSAGE value="can't get the edit to work properly" />
+    <option name="LAST_COMMIT_MESSAGE" value="can't get the edit to work properly" />
   </component>
 </project>
