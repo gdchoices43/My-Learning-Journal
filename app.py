@@ -1,7 +1,5 @@
-from flask import Flask, render_template, g, url_for, abort, flash, redirect
-from flask_bcrypt import check_password_hash
-from flask_login import (LoginManager, login_user,
-                         current_user, login_required, logout_user)
+from flask import Flask, render_template, g, url_for, abort, flash, redirect, request
+
 
 import models
 import forms
@@ -9,20 +7,11 @@ import forms
 app = Flask(__name__)
 app.secret_key = "707n#c983n,e!c^l?w*d(n9.84f2e_v707 "
 
-DEBUG = True
-PORT = 8080
-HOST = "127.0.0.1"
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "Login"
-
 
 @app.before_request
 def before_request():
     g.db = models.db
     g.db.connect()
-    g.user = current_user
 
 
 @app.after_request
@@ -31,112 +20,62 @@ def after_request(response):
     return response
 
 
-@login_manager.user_loader
-def load_user(userid):
-    try:
-        return models.User.get(models.User.id == userid)
-    except models.DoesNotExist:
-        return None
-
-
-@app.route("/login", methods=("GET", "POST"))
-def login():
-    form = forms.Login()
-    if form.validate_on_submit():
-        try:
-            user = models.User.get(models.User.email == form.email.data)
-        except models.DoesNotExist:
-            flash("Email and Password DO NOT Match!", "error")
-        else:
-            if check_password_hash(user.password, form.password.data):
-                login_user(user)
-                flash("You've Been Logged In!", "success")
-            else:
-                flash("Email and Password DO NOT Match!", "error")
-    return render_template("login.html", form=form)
-
-
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    flash("You've Been Logged Out!", "success")
-    return redirect(url_for("index"))
-
-
-@app.route("/signup", methods=("GET", "POST"))
-def sign_up():
-    form = forms.SignUp()
-    if form.validate_on_submit():
-        flash("Congrats, You're Signed Up", "success")
-        models.User.create(
-            username=form.username.data,
-            email=form.email.data,
-            password=form.password.data,
-        )
-        return redirect(url_for("index"))
-    return render_template("signup.html", form=form)
-
-
 @app.route("/")
-@app.route("/entries")
+@app.route("/entries", methods=("GET", "POST"))
 def index():
-    entries = models.Entry.select().limit(100).order_by(models.Entry.date.desc())
+    entries = models.Entry.select().order_by(models.Entry.date.desc())
     return render_template("layout.html", entries=entries)
 
 
 @app.route("/entries/new", methods=("GET", "POST"))
 def new_entry():
-    form = forms.Entry()
+    form = forms.EntryForm()
     if form.validate_on_submit():
         models.Entry.create(
-            user=g.user.get_current_object,
             title=form.title.data,
             date=form.date.data,
-            est_time=form.est_time.data,
+            time=form.time.data,
             i_learned=form.i_learned.data,
             resources=form.resources.data
         )
-        flash("Entry Published and Saved", "success")
+        flash("Saved and Published Entry", "success")
         return redirect(url_for("index"))
-    return render_template("new.html", form=form)
+    return render_template("new.html", entry=form)
 
 
-@app.route("/entries/<int:id>", methods=("GET", "POST"))
-def get_entry():
-    entry = models.Entry.get(models.Entry.id == id)
-    if entry.count() == 0:
-        abort(404)
-    return render_template("detail.html")
+@app.route("/entries/<int:entry_id>")
+def get_entry(entry_id):
+    entry = models.Entry.select().where(models.Entry.id == entry_id)
+    return render_template("detail.html", entry=entry)
 
 
-@app.route("/entries/<int:id>/edit", methods=("GET", "POST"))
-@login_required
-def edit_entry():
+@app.route("/entries/<int:entry_id>/edit", methods=("GET", "POST"))
+def edit_entry(entry_id):
+    entry = models.Entry.get(models.Entry.id == entry_id)
+    form = forms.EntryForm()
+    if request.method == "GET":
+        form.title.data = entry.title
+        form.date.data = entry.date
+        form.time.data = entry.time
+        form.i_learned.data = entry.i_learned
+        form.resources.data = entry.resources
+    elif form.validate_on_submit():
+        entry.title = form.title.data
+        entry.date = form.date.data
+        entry.time = form.time.data
+        entry.i_learned = form.i_learned.data
+        entry.resources = form.resources.data
+        flash("Saved Entry", "success")
+        return redirect(url_for("index"))
+    return render_template("edit.html", form=form, entry=entry)
+
+
+@app.route("/entries/<int:entry_id>/delete", methods=("GET", "POST"))
+def delete_entry(entry_id):
     try:
-        entry = models.Entry.get(models.Entry.id == id)
-        if current_user == entry.user:
-            models.Entry.update(
-                user=g.user.get_current_object,
-                title=entry.title.data,
-                date=entry.date.data,
-                est_time=entry.est_time.data,
-                i_learned=entry.i_learned.data,
-                resources=entry.resources.data
-            ).save()
-            flash("Entry Has Been Updated!", "success")
-    except models.DoesNotExist:
-        abort(404)
-
-
-@app.route("/entries/<int:id>/delete", methods=("GET", "POST"))
-@login_required
-def delete_entry():
-    try:
-        entry = models.Entry.get(models.Entry.id == id)
-        if current_user == entry.user:
-            entry.delete_instance()
-            flash("Entry Deleted", "success")
+        entry = models.Entry.get(models.Entry.get_id == entry_id)
+        entry.delete_instance()
+        flash("Deleted Entry", "success")
     except models.DoesNotExist:
         abort(404)
     return redirect(url_for("index"))
@@ -148,4 +87,5 @@ def abort(error):
 
 
 if __name__ == "__main__":
-    app.run(debug=DEBUG, port=PORT, host=HOST)
+    models.initialize()
+    app.run(debug=True, port=8080, host="127.0.0.1")

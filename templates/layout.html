@@ -12,35 +12,33 @@
     </head>
     <body>
         <header>
+            <h1>My Learning Journal</h1>
             <div class="container">
                 <div class="site-header">
-                    <a class="logo" href="index.html"><i class="material-icons">library_books</i></a>
-                    <a class="button icon-right" href="new.html"><span>New Entry</span> <i class="material-icons">add</i></a>
+                    <h2>Welcome! What have you learned today?</h2>
+                    <div class="container">
+                            <a href="{{ url_for('new_entry') }}" class="button icon-right">New Entry</a><br><br>
+                            <a href="{{ url_for('index') }}" class="button icon-right" title="Home">Home Page</a><br><br>
+                    </div>
                 </div>
             </div>
         </header>
         <section>
-            <div class="container">
-                <div class="entry-list">
-                    <article>
-                        <h2><a href="detail.html">The best day I’ve ever had</a></h2>
-                        <time datetime="2016-01-31">January 31, 2016</time>
-                    </article>
-                    <article>
-                        <h2><a href="detail_2.html">The absolute worst day I’ve ever had</a></h2>
-                        <time datetime="2016-01-31">January 31, 2016</time>
-                    </article>
-                    <article>
-                        <h2><a href="detail_3.html">That time at the mall</a></h2>
-                        <time datetime="2016-01-31">January 31, 2016</time>
-                    </article>
-                    <article>
-                        <h2><a href="detail_4.html">Dude, where’s my car?</a></h2>
-                        <time datetime="2016-01-31">January 31, 2016</time>
-                    </article>
+            <div>
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="notification {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <div class="container">
+                    {% block content %}
+
+                    {% endblock %}
                 </div>
             </div>
-        </section>
+        </section><br><br>
         <footer>
             <div>
                 &copy; MyJournal
