@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7f94b231-4f40-4607-81bb-e95a1d35c6f3" name="Default Changelist" comment="I think it is ready for submit">
+    <list default="true" id="7f94b231-4f40-4607-81bb-e95a1d35c6f3" name="Default Changelist" comment="fixed labels for edit.html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617744659828</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fixed labels for edit.html">
+      <created>1617755451587</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1617755451587</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -122,6 +132,7 @@
     <MESSAGE value="Still trying to figure out how to get my entries to show on the homepage" />
     <MESSAGE value="can't get the edit to work properly" />
     <MESSAGE value="I think it is ready for submit" />
-    <option name="LAST_COMMIT_MESSAGE" value="I think it is ready for submit" />
+    <MESSAGE value="fixed labels for edit.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed labels for edit.html" />
   </component>
 </project>

@@ -6,6 +6,7 @@
 <form method="POST" action="" class="edit-entry">
     {{ form.hidden_tag() }}
         {% for field in form %}
+        <!--- Mel R found that I had forgot to label the proper fields when editing --->
         {% if field.widget.input_type != "hidden" %}
             {{ field.label }}
             {{ render_field(field) }}

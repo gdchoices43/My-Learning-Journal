@@ -24,6 +24,9 @@ def after_request(response):
 @app.route("/entries", methods=("GET", "POST"))
 def index():
     stream = models.Entry.select().order_by(models.Entry.date.desc())
+    # I couldn't figure out why my entries weren't showing up on the index
+    # page. Jennifer N pointed out that in my render_template I had "layout.html"
+    # not index
     return render_template("index.html", stream=stream)
 
 
@@ -49,6 +52,8 @@ def get_entry(entry_id):
     return render_template("detail.html", stream=entries)
 
 
+# I had some hints from Jennifer N and Mel R for this function
+# to work correctly
 @app.route("/entries/<int:entry_id>/edit", methods=("GET", "POST"))
 def edit_entry(entry_id):
     entry = models.Entry.get(models.Entry.id == entry_id)
